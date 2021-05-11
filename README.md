@@ -1,2 +1,4 @@
 # totvs-test
-Front end test for TOTVS.
+
+This is the repository of TOTVS tests.
+For this challenge, I use Angular and Unit test to create a search field.
