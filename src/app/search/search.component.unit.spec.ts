@@ -55,7 +55,9 @@ describe('SearchComponent Unit', () => {
     component.onSearch('Company');
     fixture.detectChanges();
     expect(component.searching).toBe(true);
+
     component.onSearch('');
+    fixture.detectChanges();
     expect(component.searching).toBe(false);
   });
 
@@ -78,7 +80,7 @@ describe('SearchComponent Unit', () => {
     expect(input.value.trim()).toBe(LIs[0].textContent.trim());
   });
 
-  it('should search term on click on submit button', () => {
+  it('should search term on click on submit button and hide suggestion list', () => {
     const searchInput = fixture.nativeElement.querySelector('.search-input');
     searchInput.value = 'Company 1';
     searchInput.dispatchEvent(new Event('input'));
@@ -90,6 +92,12 @@ describe('SearchComponent Unit', () => {
     service.currentMessage.subscribe((companies) =>
       expect(companies).toEqual([expectedCompanies[0]])
     );
+
+    const suggestionsList = fixture.nativeElement.querySelector(
+      '.suggestions-list'
+    );
+    const suggestions = suggestionsList.querySelectorAll('.suggestions');
+    expect(suggestions.length).toBeLessThanOrEqual(0);
   });
 
   it('should reset suggestion when search is empty after click on submit button', () => {

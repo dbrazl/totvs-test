@@ -32,8 +32,8 @@ export class SearchComponent implements OnInit {
 
   onSubmit(event: any, search: string): void {
     event.preventDefault();
-    if (search.length <= 0) this.suggestions = [];
     this.companyService.setSuggestions(this.suggestions);
+    this.suggestions = [];
   }
 
   onClickSuggestion(shortName: string): void {
