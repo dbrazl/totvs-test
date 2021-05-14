@@ -51,4 +51,7 @@
     </li>
   </ul>
 </div>
-<app-dialog-modal (closeModal)="setOpenModal(false)"></app-dialog-modal>
+<app-dialog-modal
+  *ngIf="openModal"
+  (closeModal)="setOpenModal(false)"
+></app-dialog-modal>

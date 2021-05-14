@@ -1,9 +1,9 @@
-<div class="modal-container">
+<div class="modal-container" (click)="closeModal.emit()">
   <div class="modal">
     <p class="message">Tem certeza que deseja ir para tela?</p>
     <div class="buttons">
-      <button class="cancel-button">Não</button>
-      <button class="continue-button">Sim</button>
+      <button class="cancel-button" (click)="closeModal.emit()">Não</button>
+      <button class="continue-button" (click)="closeModal.emit()">Sim</button>
     </div>
   </div>
 </div>

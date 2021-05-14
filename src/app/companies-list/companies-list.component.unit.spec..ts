@@ -120,4 +120,29 @@ describe('CompaniesListComponent Unit', () => {
 
     expect(component.openModal).toBe(false);
   });
+
+  it('should change open modal state on click over modal container', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+
+    firstCompany.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(true);
+
+    const modalContainer = fixture.nativeElement.querySelector(
+      '.modal-container'
+    );
+    modalContainer.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(false);
+  });
 });

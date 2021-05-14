@@ -172,4 +172,74 @@ describe('CompaniesListComponent Interface', () => {
     );
     expect(modalContainer).toBeTruthy();
   });
+
+  it('should close modal on click over modal container', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+    const info = firstCompany.querySelector('.info');
+
+    info.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modalContainer = fixture.nativeElement.querySelector(
+      '.modal-container'
+    );
+
+    expect(modalContainer).toBeTruthy();
+
+    modalContainer.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const afterModalContainer = fixture.nativeElement.querySelector(
+      '.modal-container'
+    );
+
+    expect(afterModalContainer).toBeFalsy();
+  });
+
+  it('should close modal on click over continue or cancel button in modal', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+    const info = firstCompany.querySelector('.info');
+
+    info.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modal1 = fixture.nativeElement.querySelector('.modal');
+    expect(modal1).toBeTruthy();
+
+    const continueButton = modal1.querySelector('.continue-button');
+    continueButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modal1After = fixture.nativeElement.querySelector('.modal');
+    expect(modal1After).toBeFalsy();
+
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modal2 = fixture.nativeElement.querySelector('.modal');
+    expect(modal2).toBeTruthy();
+
+    const cancelButton = modal2.querySelector('.cancel-button');
+    cancelButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modal2After = fixture.nativeElement.querySelector('.modal');
+    expect(modal2After).toBeFalsy();
+  });
 });
