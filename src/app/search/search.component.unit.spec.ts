@@ -6,7 +6,7 @@ import { CompanyService } from '../company.service';
 
 import expectedCompanies from '../../assets/mocks/companies';
 
-describe('SearchComponent Interface', () => {
+describe('SearchComponent Unit', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let companyServiceStub: Partial<CompanyService>;
@@ -40,16 +40,16 @@ describe('SearchComponent Interface', () => {
     expect(component.companies).toBeDefined();
   });
 
-  it('should have suggestions state', () => {
-    expect(component.suggestions).toBeDefined();
-  });
-
   it('should have a state to control appear of search suggestions modal', () => {
     expect(component.searching).toBeDefined();
   });
 
   it('should get companies on load page', async () => {
     expect(component.companies).toEqual(expectedCompanies);
+  });
+
+  it('should have a suggestions state', () => {
+    expect(component.suggestions).toBeDefined();
   });
 
   it('should update searching state on search term is not empty', () => {
@@ -77,5 +77,36 @@ describe('SearchComponent Interface', () => {
 
     const input = fixture.nativeElement.querySelector('.search-input');
     expect(input.value.trim()).toBe(LIs[0].textContent.trim());
+  });
+
+  it('should search term on click on submit button', () => {
+    const searchInput = fixture.nativeElement.querySelector('.search-input');
+    searchInput.value = 'Company 1';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    const submitButton = fixture.nativeElement.querySelector('.submit-button');
+    submitButton.dispatchEvent(new Event('click'));
+
+    service.currentMessage.subscribe((companies) =>
+      expect(companies).toEqual([expectedCompanies[0]])
+    );
+  });
+
+  it('should reset suggestion when search is empty after click on submit button', () => {
+    const searchInput = fixture.nativeElement.querySelector('.search-input');
+    searchInput.value = 'Company 1';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    const submitButton = fixture.nativeElement.querySelector('.submit-button');
+    submitButton.dispatchEvent(new Event('click'));
+
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    submitButton.dispatchEvent(new Event('click'));
+    expect(component.suggestions).toEqual([]);
   });
 });

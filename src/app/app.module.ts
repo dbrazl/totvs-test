@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './homepage/homepage.component';
 import { CompanyService } from './company.service';
 import { SearchComponent } from './search/search.component';
+import { CompaniesListComponent } from './companies-list/companies-list.component';
 
 @NgModule({
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
-  declarations: [AppComponent, HomePageComponent, SearchComponent],
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    SearchComponent,
+    CompaniesListComponent,
+  ],
   providers: [CompanyService],
   bootstrap: [AppComponent],
 })

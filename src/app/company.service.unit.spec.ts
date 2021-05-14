@@ -3,6 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { CompanyService } from './company.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import expectedCompanies from '../assets/mocks/companies';
+
 describe('CompanyService Unit', () => {
   let service: CompanyService;
 

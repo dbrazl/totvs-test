@@ -18,7 +18,7 @@ describe('CompanyService Integration', () => {
     service = injector.get(CompanyService);
   });
 
-  it('should return an Observable<Company[]>', async () => {
+  it('should return a Promise<Company[]>', async () => {
     spyOn(service, 'getCompanies').and.returnValue(
       Promise.resolve(expectedCompanies)
     );

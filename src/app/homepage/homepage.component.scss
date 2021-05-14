@@ -1,5 +1,6 @@
 .page-container {
   position: relative;
+  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -13,5 +14,10 @@
 
   div.search-container {
     margin-top: 100px;
+  }
+
+  div.list-container {
+    width: 100%;
+    height: calc(100% - 295px);
   }
 }

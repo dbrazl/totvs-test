@@ -1,0 +1,53 @@
+<div class="companies-list">
+  <div *ngIf="suggestions.length <= 0" class="empty-list">
+    <img
+      src="assets/images/empty-list.svg"
+      alt="A lista está vazia"
+      class="empty-illustration"
+    />
+    <p class="empty-message">A busca está vazia.</p>
+  </div>
+  <ul *ngIf="suggestions.length > 0" class="full-list">
+    <li *ngFor="let company of suggestions" class="company">
+      <div class="info" (click)="onClickCompany(company.id)">
+        <div class="left-side">
+          <p class="short-name">{{ company.shortName }}</p>
+          <img [src]="company.logo" alt="Logo da empresa" class="logo" />
+          <p class="long-name">{{ company.longName }}</p>
+        </div>
+        <div class="right-side">
+          <button class="see-action">
+            <p
+              *ngIf="displayAboutCompanyId !== company.id"
+              class="see-action-label"
+            >
+              Ver detalhe da ação
+            </p>
+            <img
+              *ngIf="displayAboutCompanyId !== company.id"
+              src="assets/images/down-arrow.svg"
+              alt="Clique para ver mais"
+              class="see-action-icon"
+            />
+            <p
+              *ngIf="displayAboutCompanyId === company.id"
+              class="see-action-label"
+            >
+              Ocultar detalhe da ação
+            </p>
+            <img
+              *ngIf="displayAboutCompanyId === company.id"
+              src="assets/images/down-arrow.svg"
+              alt="Clique para ver mais"
+              class="see-action-icon rotate180"
+            />
+          </button>
+        </div>
+      </div>
+      <div *ngIf="displayAboutCompanyId === company.id" class="about">
+        <p class="description">{{ company.description }}</p>
+        <button class="see-more">VER MAIS</button>
+      </div>
+    </li>
+  </ul>
+</div>

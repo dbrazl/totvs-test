@@ -8,8 +8,8 @@ import { Company, CompanyService } from '../company.service';
 })
 export class SearchComponent implements OnInit {
   companies: Company[] = [];
-  searching: Boolean = false;
   suggestions: Company[] = [];
+  searching: Boolean = false;
 
   constructor(private companyService: CompanyService) {}
 
@@ -22,13 +22,26 @@ export class SearchComponent implements OnInit {
     if (value.length > 0) this.searching = true;
     else this.searching = false;
 
-    if (this.searching)
-      this.suggestions = this.companies.filter((all) =>
-        all.longName.toLowerCase().includes(value.toLowerCase())
+    if (this.searching) {
+      const suggestions = this.companies.filter((all) =>
+        all.shortName.toLowerCase().includes(value.toLowerCase())
       );
+      this.suggestions = suggestions;
+    }
+    this.companyService.setSuggestions(<Company[]>[]);
   }
 
-  onClickSuggestion(): void {
+  onSubmit(event: any, search: string): void {
+    event.preventDefault();
+    if (search.length <= 0) this.suggestions = [];
+    this.companyService.setSuggestions(this.suggestions);
+  }
+
+  onClickSuggestion(shortName: string): void {
     this.searching = false;
+    const suggestions = this.companies.filter((all) =>
+      all.longName.toLowerCase().includes(shortName.toLowerCase())
+    );
+    this.companyService.setSuggestions(suggestions);
   }
 }
