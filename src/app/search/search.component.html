@@ -1,0 +1,21 @@
+<form class="search">
+  <input
+    #search
+    type="text"
+    class="search-input"
+    placeholder="Pesquisar empresa"
+    (input)="onSearch(search.value)"
+  />
+  <button class="submit-button">
+    <img src="assets/images/search.svg" alt="Pesquisar" class="icon" />
+  </button>
+  <ul *ngIf="searching" class="suggestions-list">
+    <li
+      *ngFor="let suggestion of suggestions"
+      class="suggestion"
+      (click)="search.value = suggestion.longName; onClickSuggestion()"
+    >
+      {{ suggestion.longName }}
+    </li>
+  </ul>
+</form>

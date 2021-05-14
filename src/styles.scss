@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  outline: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+textarea,
+button,
+input,
+div,
+a {
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
