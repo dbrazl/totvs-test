@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CompanyService } from '../company.service';
 
 import expectedCompanies from '../../assets/mocks/companies';
+import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
 
 describe('CompaniesListComponent Interface', () => {
   let component: CompaniesListComponent;
@@ -14,7 +15,7 @@ describe('CompaniesListComponent Interface', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [CompaniesListComponent],
+      declarations: [CompaniesListComponent, DialogModalComponent],
       providers: [CompanyService],
     }).compileComponents();
   });
@@ -149,5 +150,26 @@ describe('CompaniesListComponent Interface', () => {
     fixture.detectChanges();
 
     expect(seeActionButton?.textContent?.trim()).toBe('Ver detalhe da ação');
+  });
+
+  it('should open modal on click to see more', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+    const info = firstCompany.querySelector('.info');
+
+    info.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.about .see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const modalContainer = fixture.nativeElement.querySelector(
+      '.modal-container'
+    );
+    expect(modalContainer).toBeTruthy();
   });
 });

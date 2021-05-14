@@ -46,8 +46,9 @@
       </div>
       <div *ngIf="displayAboutCompanyId === company.id" class="about">
         <p class="description">{{ company.description }}</p>
-        <button class="see-more">VER MAIS</button>
+        <button class="see-more" (click)="setOpenModal(true)">VER MAIS</button>
       </div>
     </li>
   </ul>
 </div>
+<app-dialog-modal (closeModal)="setOpenModal(false)"></app-dialog-modal>

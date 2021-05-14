@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HomePageComponent } from './homepage.component';
 import { SearchComponent } from '../search/search.component';
 import { CompaniesListComponent } from '../companies-list/companies-list.component';
+import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
 
 describe('HomePageComponent Interface', () => {
   let component: HomePageComponent;
@@ -15,6 +16,7 @@ describe('HomePageComponent Interface', () => {
         HomePageComponent,
         SearchComponent,
         CompaniesListComponent,
+        DialogModalComponent,
       ],
       imports: [HttpClientTestingModule],
     }).compileComponents();

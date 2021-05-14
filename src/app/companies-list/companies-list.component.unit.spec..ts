@@ -4,6 +4,7 @@ import { CompaniesListComponent } from './companies-list.component';
 import { CompanyService, Company } from '../company.service';
 import expectedCompanies from '../../assets/mocks/companies';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
 
 describe('CompaniesListComponent Unit', () => {
   let component: CompaniesListComponent;
@@ -13,7 +14,7 @@ describe('CompaniesListComponent Unit', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [CompaniesListComponent],
+      declarations: [CompaniesListComponent, DialogModalComponent],
       providers: [CompanyService],
     }).compileComponents();
   });
@@ -31,6 +32,10 @@ describe('CompaniesListComponent Unit', () => {
 
   it('should have a display about company id state', () => {
     expect(component.displayAboutCompanyId).toBeDefined();
+  });
+
+  it('should have state to control appear and desappear of modal', () => {
+    expect(component.openModal).toBeDefined();
   });
 
   it('should change display about company id state on click over a company', () => {
@@ -62,5 +67,57 @@ describe('CompaniesListComponent Unit', () => {
     fixture.detectChanges();
 
     expect(company2.displayAboutCompanyId).toBe(1);
+  });
+
+  it('should change open modal state on click over see more button on search result', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+
+    firstCompany.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(true);
+  });
+
+  it('should change open modal state on click over cancel or continue button in modal', () => {
+    component.suggestions = expectedCompanies;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelector('.full-list');
+    const firstCompany = list.querySelector('.company');
+
+    firstCompany.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    const seeMoreButton = firstCompany.querySelector('.see-more');
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(true);
+
+    const modal = fixture.nativeElement.querySelector('.modal');
+    const continueButton = modal.querySelector('.continue-button');
+    continueButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(false);
+
+    seeMoreButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(true);
+
+    const cancelButton = modal.querySelector('.continue-button');
+    cancelButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+
+    expect(component.openModal).toBe(false);
   });
 });

@@ -11,6 +11,7 @@ export class CompaniesListComponent implements OnInit, OnDestroy {
   suggestions: Company[] = [];
   subscription: Subscription = new Subscription();
   displayAboutCompanyId: number = 0;
+  openModal: Boolean = false;
 
   constructor(private companyService: CompanyService) {}
 
@@ -23,6 +24,10 @@ export class CompaniesListComponent implements OnInit, OnDestroy {
   onClickCompany(id: number) {
     if (this.displayAboutCompanyId === id) this.displayAboutCompanyId = 0;
     else this.displayAboutCompanyId = id;
+  }
+
+  setOpenModal(open: boolean): void {
+    this.openModal = open;
   }
 
   ngOnDestroy(): void {

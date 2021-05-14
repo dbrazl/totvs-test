@@ -8,6 +8,7 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { CompanyService } from './company.service';
 import { SearchComponent } from './search/search.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
+import { DialogModalComponent } from './dialog-modal/dialog-modal.component';
 
 @NgModule({
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
@@ -16,6 +17,7 @@ import { CompaniesListComponent } from './companies-list/companies-list.componen
     HomePageComponent,
     SearchComponent,
     CompaniesListComponent,
+    DialogModalComponent,
   ],
   providers: [CompanyService],
   bootstrap: [AppComponent],
