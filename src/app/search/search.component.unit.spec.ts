@@ -28,11 +28,10 @@ describe('SearchComponent Unit', () => {
   });
 
   beforeEach(async () => {
-    spyOn(component, 'ngOnInit').and.returnValue(
+    spyOn(service, 'getCompanies').and.returnValue(
       Promise.resolve(expectedCompanies)
     );
-    const companies = await component.ngOnInit();
-    component.companies = companies;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 

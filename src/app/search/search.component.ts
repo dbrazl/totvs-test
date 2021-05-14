@@ -13,9 +13,8 @@ export class SearchComponent implements OnInit {
 
   constructor(private companyService: CompanyService) {}
 
-  async ngOnInit(): Promise<Company[]> {
+  async ngOnInit(): Promise<void> {
     this.companies = await this.companyService.getCompanies();
-    return this.companies;
   }
 
   onSearch(value: string): void {

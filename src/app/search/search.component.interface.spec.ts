@@ -9,6 +9,7 @@ import expectedCompanies from '../../assets/mocks/companies';
 describe('SearchComponent Interface', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
+  let service: CompanyService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,15 +22,15 @@ describe('SearchComponent Interface', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(CompanyService);
     fixture.detectChanges();
   });
 
   beforeEach(async () => {
-    spyOn(component, 'ngOnInit').and.returnValue(
+    spyOn(service, 'getCompanies').and.returnValue(
       Promise.resolve(expectedCompanies)
     );
-    const companies = await component.ngOnInit();
-    component.companies = companies;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 
