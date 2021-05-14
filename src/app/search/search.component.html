@@ -14,11 +14,11 @@
       *ngFor="let suggestion of suggestions"
       class="suggestion"
       (click)="
-        search.value = suggestion.longName;
+        search.value = suggestion.shortName;
         onClickSuggestion(suggestion.shortName)
       "
     >
-      {{ suggestion.longName }}
+      {{ suggestion.shortName }}
     </li>
   </ul>
 </form>

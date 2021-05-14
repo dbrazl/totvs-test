@@ -32,14 +32,17 @@ export class SearchComponent implements OnInit {
 
   onSubmit(event: any, search: string): void {
     event.preventDefault();
-    this.companyService.setSuggestions(this.suggestions);
+    const suggestions = this.companies.filter((all) =>
+      all.shortName.toLowerCase().includes(search.toLowerCase())
+    );
+    this.companyService.setSuggestions(suggestions);
     this.suggestions = [];
   }
 
   onClickSuggestion(shortName: string): void {
     this.searching = false;
     const suggestions = this.companies.filter((all) =>
-      all.longName.toLowerCase().includes(shortName.toLowerCase())
+      all.shortName.toLowerCase().includes(shortName.toLowerCase())
     );
     this.companyService.setSuggestions(suggestions);
   }
