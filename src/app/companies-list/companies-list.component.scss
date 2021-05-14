@@ -1,9 +1,14 @@
 .companies-list {
   width: 100%;
-  height: calc(100% - 250px);
-  padding-top: 200px;
+  height: calc(100% - 150px);
+  padding-top: 100px;
   display: flex;
   justify-content: center;
+
+  @media (min-width: 1440px) {
+    height: calc(100% - 250px);
+    padding-top: 200px;
+  }
 
   .empty-list {
     margin: auto;
